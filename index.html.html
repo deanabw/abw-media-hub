@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABW Media & Education Hub</title>
+<title>ABW Media and Education Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -36,13 +36,6 @@ body {
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 9999;
-}
 
 /* ─── NAVBAR ─── */
 .navbar {
@@ -224,10 +217,10 @@ section { padding: 100px 0; position: relative; }
 }
 .episode-card:hover .episode-thumb img { opacity: 0.85; }
 .episode-thumb::after {
-  content: '▶'; width: 48px; height: 48px;
+  content: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='%230A1628' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 2L16 9L4 16V2Z'/%3E%3C/svg%3E");
+  width: 48px; height: 48px;
   background: rgba(197,151,91,0.9); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 16px; color: var(--navy-deep); padding-left: 3px;
   transition: transform 0.2s; position: relative; z-index: 2;
 }
 .episode-card:hover .episode-thumb::after { transform: scale(1.1); }
@@ -286,13 +279,6 @@ section { padding: 100px 0; position: relative; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--border-subtle); font-size: 13px; color: var(--text-muted); flex-wrap: wrap; gap: 16px; }
 @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .hero-stats { gap: 24px; } .hero-stat-number { font-size: 28px; } }
 @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
-
-/* Scroll reveal */
-.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
 </style>
 </head>
 <body>
@@ -302,13 +288,13 @@ section { padding: 100px 0; position: relative; }
   <div class="container">
     <a href="https://joinabw.ca" class="nav-logo">
       <div class="nav-logo-icon">abw</div>
-      <div class="nav-logo-text">Media <span>&</span> Education</div>
+      <div class="nav-logo-text">Media <span>&amp;</span> Education</div>
     </a>
     <div class="nav-links">
       <a href="#memo">Tuesday Memo</a>
       <a href="#podcast">Podcast</a>
       <a href="#latest">Latest</a>
-      <a href="https://memo.joinabw.ca" class="nav-cta">Read the Memo</a>
+      <a href="https://memo.joinabw.ca/memo" class="nav-cta">Read the Memo</a>
     </div>
   </div>
 </nav>
@@ -319,12 +305,12 @@ section { padding: 100px 0; position: relative; }
   <div class="hero-grid-lines"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-badge">ABW Media & Education Hub</div>
+      <div class="hero-badge">ABW Media and Education Hub</div>
       <h1>Stay Informed.<br>Stay <em>Equipped.</em></h1>
       <p class="hero-subtitle">Your central source for mortgage market intelligence, broker strategies, and raw conversations with the industry's top minds.</p>
       <div class="hero-actions">
         <a href="#memo" class="btn btn-primary">The Tuesday Memo</a>
-        <a href="#podcast" class="btn btn-secondary">The Broker Podcast →</a>
+        <a href="#podcast" class="btn btn-secondary">The Broker Podcast</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
@@ -348,10 +334,10 @@ section { padding: 100px 0; position: relative; }
 <section class="memo-section" id="memo">
   <div class="container">
     <div class="memo-layout">
-      <div class="memo-info reveal">
+      <div class="memo-info">
         <div class="section-label">Weekly Intelligence</div>
         <h2 class="section-title">The Tuesday<br>Memo</h2>
-        <p class="section-desc">Every Tuesday, get the mortgage market distilled — rate movements, Bank of Canada analysis, lender updates, and broker strategies delivered straight to your inbox.</p>
+        <p class="section-desc">Every Tuesday, get the mortgage market distilled: rate movements, Bank of Canada analysis, lender updates, and broker strategies delivered straight to your inbox.</p>
         <div class="memo-actions">
           <a href="https://memo.joinabw.ca/memo" class="btn btn-primary">Visit the Tuesday Memo</a>
           <a href="https://memo.joinabw.ca/memo" class="link-arrow">
@@ -361,9 +347,12 @@ section { padding: 100px 0; position: relative; }
         </div>
       </div>
       <div class="memo-preview-stack" id="memo-cards">
-        <div class="memo-card"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line medium"></div><div class="skeleton skeleton-line"></div></div>
-        <div class="memo-card"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line medium"></div><div class="skeleton skeleton-line"></div></div>
-        <div class="memo-card"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line medium"></div><div class="skeleton skeleton-line"></div></div>
+        <!-- Static fallback shown immediately, replaced by dynamic content when Supabase loads -->
+        <a href="https://memo.joinabw.ca/memo" class="memo-card" target="_blank">
+          <div class="memo-card-date">Loading latest memos...</div>
+          <div class="memo-card-title">The Tuesday Memo</div>
+          <div class="memo-card-excerpt">Weekly mortgage market insights, rate analysis, and broker strategies.</div>
+        </a>
       </div>
     </div>
   </div>
@@ -374,11 +363,11 @@ section { padding: 100px 0; position: relative; }
 <!-- PODCAST -->
 <section class="podcast-section" id="podcast">
   <div class="container">
-    <div class="podcast-header reveal">
+    <div class="podcast-header">
       <div>
         <div class="section-label">Conversations That Move the Needle</div>
         <h2 class="section-title">The Mortgage Broker<br>Podcast</h2>
-        <p class="section-desc" style="margin-top:8px;">Raw, unfiltered conversations with top brokers, lenders, and industry legends. No fluff — just the real strategies behind the numbers.</p>
+        <p class="section-desc" style="margin-top:8px;">Raw, unfiltered conversations with top brokers, lenders, and industry legends. No fluff: just the real strategies behind the numbers.</p>
       </div>
       <div class="podcast-platforms">
         <a href="https://open.spotify.com/show/38Kby2i1uptugkXGKINgxD" target="_blank" class="platform-badge">
@@ -397,12 +386,17 @@ section { padding: 100px 0; position: relative; }
     </div>
 
     <div class="episode-grid" id="episode-cards">
-      <div class="episode-card"><div class="episode-thumb"></div><div class="episode-body"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line medium"></div></div></div>
-      <div class="episode-card"><div class="episode-thumb"></div><div class="episode-body"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line medium"></div></div></div>
-      <div class="episode-card"><div class="episode-thumb"></div><div class="episode-body"><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line medium"></div></div></div>
+      <!-- Static fallback shown immediately -->
+      <a href="https://podcast.joinabw.ca" class="episode-card" target="_blank">
+        <div class="episode-thumb"><div style="position:absolute;inset:0;background:linear-gradient(135deg, #1B2A4A 0%, #2E86AB 100%);opacity:0.5;"></div></div>
+        <div class="episode-body">
+          <div class="episode-title">Loading latest episodes...</div>
+          <div class="episode-meta">The Mortgage Broker Podcast</div>
+        </div>
+      </a>
     </div>
 
-    <div class="podcast-bottom reveal">
+    <div class="podcast-bottom">
       <a href="https://podcast.joinabw.ca" class="link-arrow">
         All Episodes
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
@@ -415,19 +409,22 @@ section { padding: 100px 0; position: relative; }
 <!-- LATEST CONTENT FEED -->
 <section class="latest-section" id="latest">
   <div class="container">
-    <div class="latest-header reveal">
+    <div class="latest-header">
       <div>
         <div class="section-label">Fresh Off the Press</div>
         <h2 class="section-title">Latest from ABW</h2>
       </div>
     </div>
-    <div class="latest-feed reveal" id="latest-feed">
-      <div class="feed-item"><div class="skeleton skeleton-line short" style="margin:0;width:60px;"></div><div class="feed-item-content"><div class="skeleton skeleton-title" style="margin:0;"></div></div><div class="skeleton skeleton-line short" style="margin:0;width:80px;"></div></div>
-      <div class="feed-item"><div class="skeleton skeleton-line short" style="margin:0;width:60px;"></div><div class="feed-item-content"><div class="skeleton skeleton-title" style="margin:0;"></div></div><div class="skeleton skeleton-line short" style="margin:0;width:80px;"></div></div>
-      <div class="feed-item"><div class="skeleton skeleton-line short" style="margin:0;width:60px;"></div><div class="feed-item-content"><div class="skeleton skeleton-title" style="margin:0;"></div></div><div class="skeleton skeleton-line short" style="margin:0;width:80px;"></div></div>
-      <div class="feed-item"><div class="skeleton skeleton-line short" style="margin:0;width:60px;"></div><div class="feed-item-content"><div class="skeleton skeleton-title" style="margin:0;"></div></div><div class="skeleton skeleton-line short" style="margin:0;width:80px;"></div></div>
-      <div class="feed-item"><div class="skeleton skeleton-line short" style="margin:0;width:60px;"></div><div class="feed-item-content"><div class="skeleton skeleton-title" style="margin:0;"></div></div><div class="skeleton skeleton-line short" style="margin:0;width:80px;"></div></div>
-      <div class="feed-item"><div class="skeleton skeleton-line short" style="margin:0;width:60px;"></div><div class="feed-item-content"><div class="skeleton skeleton-title" style="margin:0;"></div></div><div class="skeleton skeleton-line short" style="margin:0;width:80px;"></div></div>
+    <div class="latest-feed" id="latest-feed">
+      <!-- Static fallback -->
+      <a href="https://memo.joinabw.ca/memo" class="feed-item" target="_blank">
+        <span class="feed-item-type feed-type-memo">Memo</span>
+        <div class="feed-item-content"><div class="feed-item-title">Loading latest content...</div></div>
+      </a>
+      <a href="https://podcast.joinabw.ca" class="feed-item" target="_blank">
+        <span class="feed-item-type feed-type-podcast">Podcast</span>
+        <div class="feed-item-content"><div class="feed-item-title">Loading latest content...</div></div>
+      </a>
     </div>
   </div>
 </section>
@@ -443,11 +440,11 @@ section { padding: 100px 0; position: relative; }
           <div class="footer-brand-icon">abw</div>
           <div class="footer-brand-name">A Better Way</div>
         </div>
-        <p class="footer-brand-desc">Canada's #1 mortgage brokerage media platform. Empowering brokers with market intelligence and industry conversations.</p>
+        <p class="footer-brand-desc">Empowering brokers with market intelligence and industry conversations.</p>
       </div>
       <div class="footer-col">
         <h4>Media</h4>
-        <a href="https://memo.joinabw.ca">Tuesday Memo</a>
+        <a href="https://memo.joinabw.ca/memo">Tuesday Memo</a>
         <a href="https://podcast.joinabw.ca">Broker Podcast</a>
         <a href="https://www.youtube.com/playlist?list=PLwMkvVlE8gwe7AuJIRYqCsNr7KBNGkeFA" target="_blank">YouTube Channel</a>
       </div>
@@ -455,254 +452,210 @@ section { padding: 100px 0; position: relative; }
         <h4>Company</h4>
         <a href="https://joinabw.ca">Join ABW</a>
         <a href="https://events.joinabw.ca">Events</a>
-        <a href="#">Ascend Summit</a>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
-        <a href="mailto:hello@joinabw.ca">hello@joinabw.ca</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Instagram</a>
+        <a href="https://joinabw.ca">joinabw.ca</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 A Better Way Mortgage Group. All rights reserved.</span>
-      <span>Mortgage Architects · Dominion Lending Centres</span>
+      <span>2026 A Better Way Mortgage Group. All rights reserved.</span>
+      <span>Mortgage Architects - Dominion Lending Centres</span>
     </div>
   </div>
 </footer>
 
 <script>
-// ─── SUPABASE CONFIG ───
-const MEMO_URL = 'https://dvcgzxtqegymnsjqfeue.supabase.co';
-const MEMO_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2Y2d6eHRxZWd5bW5zanFmZXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5NTgwMDAsImV4cCI6MjA4NjUzNDAwMH0.fGcdFjf3mi-eyikcwtvqWev3rk6A_2MWC7fGnsI9U68';
+// Supabase config
+var MEMO_URL = "https://dvcgzxtqegymnsjqfeue.supabase.co";
+var MEMO_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2Y2d6eHRxZWd5bW5zanFmZXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5NTgwMDAsImV4cCI6MjA4NjUzNDAwMH0.fGcdFjf3mi-eyikcwtvqWev3rk6A_2MWC7fGnsI9U68";
 
-const PODCAST_URL = 'https://avdwudfuuhjvnagfnpix.supabase.co';
-const PODCAST_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2ZHd1ZGZ1dWhqdm5hZ2ZucGl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExODQzNjcsImV4cCI6MjA4Njc2MDM2N30.uTeWubmQXy-qBzv7XxL7pPGUqP83USiap8-lIwicMbM';
+var PODCAST_URL = "https://avdwudfuuhjvnagfnpix.supabase.co";
+var PODCAST_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2ZHd1ZGZ1dWhqdm5hZ2ZucGl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExODQzNjcsImV4cCI6MjA4Njc2MDM2N30.uTeWubmQXy-qBzv7XxL7pPGUqP83USiap8-lIwicMbM";
 
-// ─── HELPERS ───
-async function supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraParams) {
-  let url = `${baseUrl}/rest/v1/${table}?select=${select}&order=${orderCol}.desc&limit=${limit}`;
-  if (extraParams) url += '&' + extraParams;
-  const res = await fetch(url, {
-    headers: { 'apikey': apiKey, 'Authorization': `Bearer ${apiKey}` }
-  });
-  if (!res.ok) throw new Error(`Supabase ${res.status}: ${await res.text()}`);
-  return res.json();
-}
-
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-}
-function formatDateShort(dateStr) {
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-// Build a display title from memo slug: "2026-02-11-rate-hold" → "Rate Hold"
-function memoTitleFromSlug(slug) {
-  if (!slug) return 'Weekly Memo';
-  // Remove date prefix if present (e.g., "2026-02-11-")
-  const withoutDate = slug.replace(/^\d{4}-\d{2}-\d{2}-?/, '');
-  return withoutDate
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ') || 'Weekly Memo';
-}
-
-const arrowIcon = '<svg class="feed-item-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
-
-const thumbGradients = [
-  'linear-gradient(135deg, #1B2A4A 0%, #2E86AB 100%)',
-  'linear-gradient(135deg, #0F1D35 0%, #C5975B 100%)',
-  'linear-gradient(135deg, #1B2A4A 0%, #5BC58C 100%)',
+var thumbGradients = [
+  "linear-gradient(135deg, #1B2A4A 0%, #2E86AB 100%)",
+  "linear-gradient(135deg, #0F1D35 0%, #C5975B 100%)",
+  "linear-gradient(135deg, #1B2A4A 0%, #5BC58C 100%)"
 ];
 
-// ─── LOAD MEMOS ───
-// Table: memos | Columns: id, slug, week_of, status, intro, bullets, created_at
-async function loadMemos() {
+function formatDate(dateStr) {
   try {
-    const memos = await supabaseQuery(
-      MEMO_URL, MEMO_KEY,
-      'memos',
-      'id,slug,week_of,intro,created_at',
-      'week_of',
-      3,
-      'status=eq.published'
-    );
-    const container = document.getElementById('memo-cards');
+    return new Date(dateStr).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  } catch(e) { return ""; }
+}
 
-    if (!memos.length) {
-      // Fallback: try without status filter in case status values differ
-      const fallback = await supabaseQuery(MEMO_URL, MEMO_KEY, 'memos', 'id,slug,week_of,intro,created_at', 'created_at', 3);
-      if (!fallback.length) {
-        container.innerHTML = '<a href="https://memo.joinabw.ca/memo" class="memo-card" target="_blank"><div class="memo-card-title">Visit the Tuesday Memo →</div><div class="memo-card-excerpt">Read the latest mortgage market insights.</div></a>';
-        return [];
+function formatDateShort(dateStr) {
+  try {
+    return new Date(dateStr).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  } catch(e) { return ""; }
+}
+
+function memoTitleFromSlug(slug) {
+  if (!slug) return "Weekly Memo";
+  var withoutDate = slug.replace(/^\d{4}-\d{2}-\d{2}-?/, "");
+  if (!withoutDate) return "Weekly Memo";
+  return withoutDate.split("-").map(function(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(" ");
+}
+
+function supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraParams) {
+  var url = baseUrl + "/rest/v1/" + table + "?select=" + select + "&order=" + orderCol + ".desc&limit=" + limit;
+  if (extraParams) url += "&" + extraParams;
+  return fetch(url, {
+    headers: { "apikey": apiKey, "Authorization": "Bearer " + apiKey }
+  }).then(function(res) {
+    if (!res.ok) throw new Error("Supabase error " + res.status);
+    return res.json();
+  });
+}
+
+// Load memos
+function loadMemos() {
+  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 3, "status=eq.published")
+    .catch(function() {
+      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 3);
+    })
+    .then(function(memos) {
+      if (!memos || !memos.length) return [];
+      var container = document.getElementById("memo-cards");
+      var html = "";
+      for (var i = 0; i < memos.length; i++) {
+        var m = memos[i];
+        var dateStr = m.week_of || m.created_at;
+        var title = memoTitleFromSlug(m.slug);
+        var excerpt = m.intro ? m.intro.substring(0, 160) : "";
+        if (m.intro && m.intro.length > 160) excerpt += "...";
+        html += '<a href="https://memo.joinabw.ca/memo/' + m.slug + '" class="memo-card" target="_blank">';
+        html += '<div class="memo-card-date">' + formatDate(dateStr) + '</div>';
+        html += '<div class="memo-card-title">' + title + '</div>';
+        if (excerpt) html += '<div class="memo-card-excerpt">' + excerpt + '</div>';
+        html += '</a>';
       }
-      return renderMemos(fallback, container);
-    }
-    return renderMemos(memos, container);
-  } catch (err) {
-    console.error('Memos error:', err);
-    // Retry without status filter
-    try {
-      const fallback = await supabaseQuery(MEMO_URL, MEMO_KEY, 'memos', 'id,slug,week_of,intro,created_at', 'created_at', 3);
-      if (fallback.length) return renderMemos(fallback, document.getElementById('memo-cards'));
-    } catch (e) { console.error('Memos fallback error:', e); }
-    document.getElementById('memo-cards').innerHTML = '<a href="https://memo.joinabw.ca/memo" class="memo-card" target="_blank"><div class="memo-card-title">Visit the Tuesday Memo →</div><div class="memo-card-excerpt">Read the latest mortgage market insights.</div></a>';
-    return [];
-  }
+      container.innerHTML = html;
+      return memos;
+    })
+    .catch(function(err) {
+      console.error("Memos error:", err);
+      return [];
+    });
 }
 
-function renderMemos(memos, container) {
-  container.innerHTML = memos.map((m, i) => {
-    const dateStr = m.week_of || m.created_at;
-    const title = memoTitleFromSlug(m.slug);
-    const excerpt = m.intro ? m.intro.substring(0, 160) + (m.intro.length > 160 ? '…' : '') : '';
-    return `
-      <a href="https://memo.joinabw.ca/memo/${m.slug}" class="memo-card reveal reveal-delay-${i+1}" target="_blank">
-        <div class="memo-card-date">${formatDate(dateStr)}</div>
-        <div class="memo-card-title">${title}</div>
-        ${excerpt ? `<div class="memo-card-excerpt">${excerpt}</div>` : ''}
-      </a>
-    `;
-  }).join('');
-  container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  // Update stat
-  document.getElementById('stat-memos').textContent = memos.length + '+';
-  return memos;
-}
+// Load episodes
+function loadEpisodes() {
+  supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "published_at", 3, "status=eq.published")
+    .catch(function() {
+      return supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "published_at", 3);
+    })
+    .then(function(episodes) {
+      if (!episodes || !episodes.length) return [];
+      var container = document.getElementById("episode-cards");
+      var html = "";
+      for (var i = 0; i < episodes.length; i++) {
+        var ep = episodes[i];
+        var thumbHtml = ep.thumbnail_url
+          ? '<img src="' + ep.thumbnail_url + '" alt="" loading="lazy">'
+          : '<div style="position:absolute;inset:0;background:' + thumbGradients[i % 3] + ';opacity:0.5;"></div>';
+        var seriesLabel = ep.series || "";
+        var meta = formatDate(ep.published_at);
+        if (ep.episode_number) meta = "Ep. " + ep.episode_number + " - " + meta;
 
-// ─── LOAD EPISODES ───
-// Table: podcast_episodes | Columns: id, title, slug, series, description, thumbnail_url, published_at, episode_number, status
-async function loadEpisodes() {
-  try {
-    const episodes = await supabaseQuery(
-      PODCAST_URL, PODCAST_KEY,
-      'podcast_episodes',
-      'id,title,slug,series,description,thumbnail_url,published_at,episode_number',
-      'published_at',
-      3,
-      'status=eq.published'
-    );
-    const container = document.getElementById('episode-cards');
-
-    if (!episodes.length) {
-      // Fallback without status filter
-      const fallback = await supabaseQuery(PODCAST_URL, PODCAST_KEY, 'podcast_episodes', 'id,title,slug,series,description,thumbnail_url,published_at,episode_number', 'published_at', 3);
-      if (!fallback.length) {
-        container.innerHTML = '<a href="https://podcast.joinabw.ca" class="episode-card" target="_blank"><div class="episode-thumb"></div><div class="episode-body"><div class="episode-title">Visit The Mortgage Broker Podcast →</div><div class="episode-meta">Listen to 60+ episodes</div></div></a>';
-        return [];
+        html += '<a href="https://podcast.joinabw.ca/episodes/' + ep.slug + '" class="episode-card" target="_blank">';
+        html += '<div class="episode-thumb">' + thumbHtml + '</div>';
+        html += '<div class="episode-body">';
+        if (seriesLabel) html += '<span class="episode-series">' + seriesLabel + '</span>';
+        html += '<div class="episode-title">' + ep.title + '</div>';
+        html += '<div class="episode-meta">' + meta + '</div>';
+        html += '</div></a>';
       }
-      return renderEpisodes(fallback, container);
-    }
-    return renderEpisodes(episodes, container);
-  } catch (err) {
-    console.error('Episodes error:', err);
-    // Retry without status filter
-    try {
-      const fallback = await supabaseQuery(PODCAST_URL, PODCAST_KEY, 'podcast_episodes', 'id,title,slug,series,description,thumbnail_url,published_at,episode_number', 'published_at', 3);
-      if (fallback.length) return renderEpisodes(fallback, document.getElementById('episode-cards'));
-    } catch (e) { console.error('Episodes fallback error:', e); }
-    document.getElementById('episode-cards').innerHTML = '<a href="https://podcast.joinabw.ca" class="episode-card" target="_blank"><div class="episode-thumb"></div><div class="episode-body"><div class="episode-title">Visit The Mortgage Broker Podcast →</div><div class="episode-meta">Listen to 60+ episodes</div></div></a>';
-    return [];
-  }
-}
-
-function renderEpisodes(episodes, container) {
-  container.innerHTML = episodes.map((ep, i) => {
-    const thumbHtml = ep.thumbnail_url
-      ? `<img src="${ep.thumbnail_url}" alt="${ep.title}" loading="lazy">`
-      : `<div style="position:absolute;inset:0;background:${thumbGradients[i % 3]};opacity:0.5;"></div>`;
-    const epNum = ep.episode_number ? `Ep. ${ep.episode_number}` : '';
-    const seriesLabel = ep.series || '';
-    const meta = [seriesLabel, epNum, formatDate(ep.published_at)].filter(Boolean).join(' · ');
-    return `
-      <a href="https://podcast.joinabw.ca/episodes/${ep.slug}" class="episode-card reveal reveal-delay-${i+1}" target="_blank">
-        <div class="episode-thumb">${thumbHtml}</div>
-        <div class="episode-body">
-          ${seriesLabel ? `<span class="episode-series">${seriesLabel}</span>` : ''}
-          <div class="episode-title">${ep.title}</div>
-          <div class="episode-meta">${meta}</div>
-        </div>
-      </a>
-    `;
-  }).join('');
-  container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  document.getElementById('stat-episodes').textContent = episodes.length + '+';
-  return episodes;
-}
-
-// ─── RENDER COMBINED FEED ───
-function renderLatestFeed(memos, episodes) {
-  const items = [
-    ...memos.map(m => ({
-      type: 'memo',
-      title: memoTitleFromSlug(m.slug),
-      date: m.week_of || m.created_at,
-      url: `https://memo.joinabw.ca/memo/${m.slug}`
-    })),
-    ...episodes.map(e => ({
-      type: 'podcast',
-      title: e.title,
-      date: e.published_at,
-      url: `https://podcast.joinabw.ca/episodes/${e.slug}`
-    })),
-  ].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  const container = document.getElementById('latest-feed');
-  if (!items.length) {
-    container.innerHTML = '<p style="color:var(--text-muted);padding:24px;">No content yet.</p>';
-    return;
-  }
-
-  container.innerHTML = items.map(item => `
-    <a href="${item.url}" class="feed-item" target="_blank">
-      <span class="feed-item-type ${item.type === 'memo' ? 'feed-type-memo' : 'feed-type-podcast'}">${item.type === 'memo' ? 'Memo' : 'Podcast'}</span>
-      <div class="feed-item-content"><div class="feed-item-title">${item.title}</div></div>
-      <span class="feed-item-date">${formatDateShort(item.date)}</span>
-      ${arrowIcon}
-    </a>
-  `).join('');
-}
-
-// ─── DYNAMIC STATS ───
-async function updateStats() {
-  try {
-    // Get total memo count
-    const memoRes = await fetch(`${MEMO_URL}/rest/v1/memos?select=id&limit=1`, {
-      headers: { 'apikey': MEMO_KEY, 'Authorization': `Bearer ${MEMO_KEY}`, 'Prefer': 'count=exact' }
+      container.innerHTML = html;
+      return episodes;
+    })
+    .catch(function(err) {
+      console.error("Episodes error:", err);
+      return [];
     });
-    const memoCount = memoRes.headers.get('content-range');
-    if (memoCount) {
-      const total = memoCount.split('/')[1];
-      if (total && total !== '*') document.getElementById('stat-memos').textContent = total + '+';
-    }
-  } catch (e) { /* keep defaults */ }
-
-  try {
-    // Get total episode count
-    const epRes = await fetch(`${PODCAST_URL}/rest/v1/podcast_episodes?select=id&limit=1`, {
-      headers: { 'apikey': PODCAST_KEY, 'Authorization': `Bearer ${PODCAST_KEY}`, 'Prefer': 'count=exact' }
-    });
-    const epCount = epRes.headers.get('content-range');
-    if (epCount) {
-      const total = epCount.split('/')[1];
-      if (total && total !== '*') document.getElementById('stat-episodes').textContent = total + '+';
-    }
-  } catch (e) { /* keep defaults */ }
 }
 
-// ─── INIT ───
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// Load combined feed
+function loadLatestFeed() {
+  var memosPromise = supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,created_at", "created_at", 3)
+    .catch(function() { return []; });
+  var episodesPromise = supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,published_at", "published_at", 3)
+    .catch(function() { return []; });
 
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  Promise.all([memosPromise, episodesPromise]).then(function(results) {
+    var memos = results[0] || [];
+    var episodes = results[1] || [];
+    var items = [];
+
+    for (var i = 0; i < memos.length; i++) {
+      items.push({
+        type: "memo",
+        title: memoTitleFromSlug(memos[i].slug),
+        date: memos[i].week_of || memos[i].created_at,
+        url: "https://memo.joinabw.ca/memo/" + memos[i].slug
+      });
+    }
+    for (var j = 0; j < episodes.length; j++) {
+      items.push({
+        type: "podcast",
+        title: episodes[j].title,
+        date: episodes[j].published_at,
+        url: "https://podcast.joinabw.ca/episodes/" + episodes[j].slug
+      });
+    }
+
+    items.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+
+    if (!items.length) return;
+
+    var container = document.getElementById("latest-feed");
+    var arrowSvg = '<svg class="feed-item-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
+    var html = "";
+
+    for (var k = 0; k < items.length; k++) {
+      var item = items[k];
+      var typeClass = item.type === "memo" ? "feed-type-memo" : "feed-type-podcast";
+      var typeLabel = item.type === "memo" ? "Memo" : "Podcast";
+      html += '<a href="' + item.url + '" class="feed-item" target="_blank">';
+      html += '<span class="feed-item-type ' + typeClass + '">' + typeLabel + '</span>';
+      html += '<div class="feed-item-content"><div class="feed-item-title">' + item.title + '</div></div>';
+      html += '<span class="feed-item-date">' + formatDateShort(item.date) + '</span>';
+      html += arrowSvg;
+      html += '</a>';
+    }
+    container.innerHTML = html;
+  }).catch(function(err) {
+    console.error("Latest feed error:", err);
+  });
+}
+
+// Navbar scroll
+window.addEventListener("scroll", function() {
+  var nav = document.getElementById("navbar");
+  if (window.scrollY > 60) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
 });
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
+// Smooth scroll for anchor links
+var anchors = document.querySelectorAll('a[href^="#"]');
+for (var i = 0; i < anchors.length; i++) {
+  anchors[i].addEventListener("click", function(e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth'
+    var target = document.querySelector(this.getAttribute("href"));
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+// Load data (non-blocking, page is fully visible without it)
+loadMemos();
+loadEpisodes();
+loadLatestFeed();
+</script>
+</body>
+</html>
