@@ -218,6 +218,11 @@ section { padding: 100px 0; position: relative; }
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
+.episode-thumb img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.7; transition: opacity 0.3s;
+}
+.episode-card:hover .episode-thumb img { opacity: 0.85; }
 .episode-thumb::after {
   content: '▶'; width: 48px; height: 48px;
   background: rgba(197,151,91,0.9); border-radius: 50%;
@@ -323,11 +328,11 @@ section { padding: 100px 0; position: relative; }
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="hero-stat-number">50+</div>
+          <div class="hero-stat-number" id="stat-memos">50+</div>
           <div class="hero-stat-label">Weekly Memos</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-number">60+</div>
+          <div class="hero-stat-number" id="stat-episodes">60+</div>
           <div class="hero-stat-label">Episodes</div>
         </div>
         <div class="hero-stat">
@@ -376,15 +381,15 @@ section { padding: 100px 0; position: relative; }
         <p class="section-desc" style="margin-top:8px;">Raw, unfiltered conversations with top brokers, lenders, and industry legends. No fluff — just the real strategies behind the numbers.</p>
       </div>
       <div class="podcast-platforms">
-        <a href="#" class="platform-badge">
+        <a href="https://open.spotify.com/show/38Kby2i1uptugkXGKINgxD" target="_blank" class="platform-badge">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
           Spotify
         </a>
-        <a href="#" class="platform-badge">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.88 15.36c-.32.48-.99.64-1.48.32-4.07-2.49-9.2-3.06-15.24-1.67-.58.14-1.16-.22-1.3-.8-.14-.58.22-1.16.8-1.3 6.6-1.52 12.27-.86 16.83 1.93.5.3.66.98.39 1.52zM20.45 12.24c-.4.6-1.24.8-1.84.4-4.66-2.87-11.77-3.7-17.28-2.02-.72.22-1.48-.18-1.7-.9-.22-.72.18-1.48.9-1.7 6.3-1.92 14.13-.99 19.42 2.3.58.38.78 1.22.5 1.92zM20.64 9c-5.6-3.33-14.84-3.64-20.18-2.01-.86.26-1.76-.22-2.02-1.08-.26-.86.22-1.76 1.08-2.02 6.12-1.87 16.3-1.51 22.72 2.33.78.46 1.04 1.48.58 2.26-.46.72-1.46 1.04-2.18.52z"/></svg>
+        <a href="https://podcasts.apple.com/us/podcast/the-mortgage-broker-podcast/id1725650373" target="_blank" class="platform-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392.12.6-.36 1.2-.96 1.2h-.12c-.48 0-.84-.36-.96-.84-.528-2.34-1.776-3.876-3.648-4.788a7.073 7.073 0 00-2.712-.588c-3.816 0-6.9 3.168-6.78 7.056.06 1.716.72 3.276 1.872 4.452a6.672 6.672 0 004.56 1.932c.96.024 1.776-.12 2.664-.468.36-.144.792-.048 1.044.264l.06.072c.312.408.168.984-.288 1.188a8.265 8.265 0 01-3.48.696 8.376 8.376 0 01-5.736-2.424A8.377 8.377 0 013.36 11.64c.048-4.608 3.864-8.376 8.505-8.376v-.696zm.072 3.504a4.878 4.878 0 014.56 3.144c.168.432-.072.912-.504 1.08h-.024c-.384.144-.816-.024-.984-.384a3.168 3.168 0 00-3.024-2.088 3.168 3.168 0 00-3.168 3.168c0 .864.336 1.656.924 2.244a3.12 3.12 0 002.244.924c.624 0 1.2-.168 1.704-.504.336-.216.792-.12 1.032.192l.024.024c.288.372.144.888-.264 1.128a4.896 4.896 0 01-2.496.66 4.848 4.848 0 01-3.456-1.44 4.848 4.848 0 01-1.44-3.456 4.92 4.92 0 014.872-4.692zm-.024 3.48a1.596 1.596 0 011.272.636c.264.36.384.804.324 1.26-.108.876-.384 1.62-.6 2.412-.192.672-.372 1.356-.444 2.064-.072.708.06 1.344.636 1.848.216.192.504.312.804.36.456.072.792-.096 1.092-.384.264-.252.432-.564.54-.912.192-.6.12-1.2-.12-1.776l-.024-.048c-.168-.348-.024-.768.336-.912.384-.144.792.024.936.384.384.912.456 1.848.084 2.784-.276.696-.756 1.2-1.404 1.5-.972.456-2.1.3-2.892-.432-.564-.528-.828-1.164-.876-1.908-.048-.72.108-1.404.3-2.076.24-.84.528-1.668.636-2.544.06-.468-.12-.756-.504-.888a.93.93 0 00-.312-.048c-.42.012-.744.252-.876.636a1.434 1.434 0 00-.06.456c-.012.384-.312.696-.696.672-.384-.012-.672-.324-.66-.708.024-.636.276-1.176.732-1.608.384-.36.828-.564 1.356-.564h.024z"/></svg>
           Apple
         </a>
-        <a href="#" class="platform-badge">
+        <a href="https://www.youtube.com/playlist?list=PLwMkvVlE8gwe7AuJIRYqCsNr7KBNGkeFA" target="_blank" class="platform-badge">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           YouTube
         </a>
@@ -444,7 +449,7 @@ section { padding: 100px 0; position: relative; }
         <h4>Media</h4>
         <a href="https://memo.joinabw.ca">Tuesday Memo</a>
         <a href="https://podcast.joinabw.ca">Broker Podcast</a>
-        <a href="#">YouTube Channel</a>
+        <a href="https://www.youtube.com/playlist?list=PLwMkvVlE8gwe7AuJIRYqCsNr7KBNGkeFA" target="_blank">YouTube Channel</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -475,12 +480,13 @@ const PODCAST_URL = 'https://avdwudfuuhjvnagfnpix.supabase.co';
 const PODCAST_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2ZHd1ZGZ1dWhqdm5hZ2ZucGl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExODQzNjcsImV4cCI6MjA4Njc2MDM2N30.uTeWubmQXy-qBzv7XxL7pPGUqP83USiap8-lIwicMbM';
 
 // ─── HELPERS ───
-async function supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit) {
-  const url = `${baseUrl}/rest/v1/${table}?select=${select}&order=${orderCol}.desc&limit=${limit}`;
+async function supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraParams) {
+  let url = `${baseUrl}/rest/v1/${table}?select=${select}&order=${orderCol}.desc&limit=${limit}`;
+  if (extraParams) url += '&' + extraParams;
   const res = await fetch(url, {
     headers: { 'apikey': apiKey, 'Authorization': `Bearer ${apiKey}` }
   });
-  if (!res.ok) throw new Error(`Supabase error: ${res.status}`);
+  if (!res.ok) throw new Error(`Supabase ${res.status}: ${await res.text()}`);
   return res.json();
 }
 
@@ -489,6 +495,17 @@ function formatDate(dateStr) {
 }
 function formatDateShort(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// Build a display title from memo slug: "2026-02-11-rate-hold" → "Rate Hold"
+function memoTitleFromSlug(slug) {
+  if (!slug) return 'Weekly Memo';
+  // Remove date prefix if present (e.g., "2026-02-11-")
+  const withoutDate = slug.replace(/^\d{4}-\d{2}-\d{2}-?/, '');
+  return withoutDate
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ') || 'Weekly Memo';
 }
 
 const arrowIcon = '<svg class="feed-item-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
@@ -500,65 +517,142 @@ const thumbGradients = [
 ];
 
 // ─── LOAD MEMOS ───
+// Table: memos | Columns: id, slug, week_of, status, intro, bullets, created_at
 async function loadMemos() {
   try {
-    const memos = await supabaseQuery(MEMO_URL, MEMO_KEY, 'memos', 'id,title,slug,summary,created_at', 'created_at', 3);
+    const memos = await supabaseQuery(
+      MEMO_URL, MEMO_KEY,
+      'memos',
+      'id,slug,week_of,intro,created_at',
+      'week_of',
+      3,
+      'status=eq.published'
+    );
     const container = document.getElementById('memo-cards');
-    if (!memos.length) { container.innerHTML = '<p style="color:var(--text-muted);padding:20px;">No memos found.</p>'; return memos; }
 
-    container.innerHTML = memos.map((m, i) => `
-      <a href="https://memo.joinabw.ca/memo/${m.slug}" class="memo-card reveal reveal-delay-${i+1}" target="_blank">
-        <div class="memo-card-date">${formatDate(m.created_at)}</div>
-        <div class="memo-card-title">${m.title}</div>
-        ${m.summary ? `<div class="memo-card-excerpt">${m.summary.substring(0, 160)}${m.summary.length > 160 ? '…' : ''}</div>` : ''}
-      </a>
-    `).join('');
-    container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    return memos;
+    if (!memos.length) {
+      // Fallback: try without status filter in case status values differ
+      const fallback = await supabaseQuery(MEMO_URL, MEMO_KEY, 'memos', 'id,slug,week_of,intro,created_at', 'created_at', 3);
+      if (!fallback.length) {
+        container.innerHTML = '<a href="https://memo.joinabw.ca/memo" class="memo-card" target="_blank"><div class="memo-card-title">Visit the Tuesday Memo →</div><div class="memo-card-excerpt">Read the latest mortgage market insights.</div></a>';
+        return [];
+      }
+      return renderMemos(fallback, container);
+    }
+    return renderMemos(memos, container);
   } catch (err) {
     console.error('Memos error:', err);
-    document.getElementById('memo-cards').innerHTML = `<a href="https://memo.joinabw.ca/memo" class="memo-card" target="_blank"><div class="memo-card-title">Visit the Tuesday Memo →</div><div class="memo-card-excerpt">Read the latest mortgage market insights.</div></a>`;
+    // Retry without status filter
+    try {
+      const fallback = await supabaseQuery(MEMO_URL, MEMO_KEY, 'memos', 'id,slug,week_of,intro,created_at', 'created_at', 3);
+      if (fallback.length) return renderMemos(fallback, document.getElementById('memo-cards'));
+    } catch (e) { console.error('Memos fallback error:', e); }
+    document.getElementById('memo-cards').innerHTML = '<a href="https://memo.joinabw.ca/memo" class="memo-card" target="_blank"><div class="memo-card-title">Visit the Tuesday Memo →</div><div class="memo-card-excerpt">Read the latest mortgage market insights.</div></a>';
     return [];
   }
 }
 
+function renderMemos(memos, container) {
+  container.innerHTML = memos.map((m, i) => {
+    const dateStr = m.week_of || m.created_at;
+    const title = memoTitleFromSlug(m.slug);
+    const excerpt = m.intro ? m.intro.substring(0, 160) + (m.intro.length > 160 ? '…' : '') : '';
+    return `
+      <a href="https://memo.joinabw.ca/memo/${m.slug}" class="memo-card reveal reveal-delay-${i+1}" target="_blank">
+        <div class="memo-card-date">${formatDate(dateStr)}</div>
+        <div class="memo-card-title">${title}</div>
+        ${excerpt ? `<div class="memo-card-excerpt">${excerpt}</div>` : ''}
+      </a>
+    `;
+  }).join('');
+  container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Update stat
+  document.getElementById('stat-memos').textContent = memos.length + '+';
+  return memos;
+}
+
 // ─── LOAD EPISODES ───
+// Table: podcast_episodes | Columns: id, title, slug, series, description, thumbnail_url, published_at, episode_number, status
 async function loadEpisodes() {
   try {
-    const episodes = await supabaseQuery(PODCAST_URL, PODCAST_KEY, 'podcast_episodes', 'id,title,slug,series_name,published_at', 'published_at', 3);
+    const episodes = await supabaseQuery(
+      PODCAST_URL, PODCAST_KEY,
+      'podcast_episodes',
+      'id,title,slug,series,description,thumbnail_url,published_at,episode_number',
+      'published_at',
+      3,
+      'status=eq.published'
+    );
     const container = document.getElementById('episode-cards');
-    if (!episodes.length) { container.innerHTML = '<p style="color:var(--text-muted);padding:20px;">No episodes found.</p>'; return episodes; }
 
-    container.innerHTML = episodes.map((ep, i) => `
-      <a href="https://podcast.joinabw.ca/episodes/${ep.slug}" class="episode-card reveal reveal-delay-${i+1}" target="_blank">
-        <div class="episode-thumb">
-          <div style="position:absolute;inset:0;background:${thumbGradients[i % 3]};opacity:0.5;"></div>
-        </div>
-        <div class="episode-body">
-          ${ep.series_name ? `<span class="episode-series">${ep.series_name}</span>` : ''}
-          <div class="episode-title">${ep.title}</div>
-          <div class="episode-meta">${formatDate(ep.published_at)}</div>
-        </div>
-      </a>
-    `).join('');
-    container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    return episodes;
+    if (!episodes.length) {
+      // Fallback without status filter
+      const fallback = await supabaseQuery(PODCAST_URL, PODCAST_KEY, 'podcast_episodes', 'id,title,slug,series,description,thumbnail_url,published_at,episode_number', 'published_at', 3);
+      if (!fallback.length) {
+        container.innerHTML = '<a href="https://podcast.joinabw.ca" class="episode-card" target="_blank"><div class="episode-thumb"></div><div class="episode-body"><div class="episode-title">Visit The Mortgage Broker Podcast →</div><div class="episode-meta">Listen to 60+ episodes</div></div></a>';
+        return [];
+      }
+      return renderEpisodes(fallback, container);
+    }
+    return renderEpisodes(episodes, container);
   } catch (err) {
     console.error('Episodes error:', err);
-    document.getElementById('episode-cards').innerHTML = `<a href="https://podcast.joinabw.ca" class="episode-card" target="_blank"><div class="episode-thumb"></div><div class="episode-body"><div class="episode-title">Visit The Mortgage Broker Podcast →</div><div class="episode-meta">Listen to 60+ episodes</div></div></a>`;
+    // Retry without status filter
+    try {
+      const fallback = await supabaseQuery(PODCAST_URL, PODCAST_KEY, 'podcast_episodes', 'id,title,slug,series,description,thumbnail_url,published_at,episode_number', 'published_at', 3);
+      if (fallback.length) return renderEpisodes(fallback, document.getElementById('episode-cards'));
+    } catch (e) { console.error('Episodes fallback error:', e); }
+    document.getElementById('episode-cards').innerHTML = '<a href="https://podcast.joinabw.ca" class="episode-card" target="_blank"><div class="episode-thumb"></div><div class="episode-body"><div class="episode-title">Visit The Mortgage Broker Podcast →</div><div class="episode-meta">Listen to 60+ episodes</div></div></a>';
     return [];
   }
+}
+
+function renderEpisodes(episodes, container) {
+  container.innerHTML = episodes.map((ep, i) => {
+    const thumbHtml = ep.thumbnail_url
+      ? `<img src="${ep.thumbnail_url}" alt="${ep.title}" loading="lazy">`
+      : `<div style="position:absolute;inset:0;background:${thumbGradients[i % 3]};opacity:0.5;"></div>`;
+    const epNum = ep.episode_number ? `Ep. ${ep.episode_number}` : '';
+    const seriesLabel = ep.series || '';
+    const meta = [seriesLabel, epNum, formatDate(ep.published_at)].filter(Boolean).join(' · ');
+    return `
+      <a href="https://podcast.joinabw.ca/episodes/${ep.slug}" class="episode-card reveal reveal-delay-${i+1}" target="_blank">
+        <div class="episode-thumb">${thumbHtml}</div>
+        <div class="episode-body">
+          ${seriesLabel ? `<span class="episode-series">${seriesLabel}</span>` : ''}
+          <div class="episode-title">${ep.title}</div>
+          <div class="episode-meta">${meta}</div>
+        </div>
+      </a>
+    `;
+  }).join('');
+  container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.getElementById('stat-episodes').textContent = episodes.length + '+';
+  return episodes;
 }
 
 // ─── RENDER COMBINED FEED ───
 function renderLatestFeed(memos, episodes) {
   const items = [
-    ...memos.map(m => ({ type: 'memo', title: m.title, date: m.created_at, url: `https://memo.joinabw.ca/memo/${m.slug}` })),
-    ...episodes.map(e => ({ type: 'podcast', title: e.title, date: e.published_at, url: `https://podcast.joinabw.ca/episodes/${e.slug}` })),
+    ...memos.map(m => ({
+      type: 'memo',
+      title: memoTitleFromSlug(m.slug),
+      date: m.week_of || m.created_at,
+      url: `https://memo.joinabw.ca/memo/${m.slug}`
+    })),
+    ...episodes.map(e => ({
+      type: 'podcast',
+      title: e.title,
+      date: e.published_at,
+      url: `https://podcast.joinabw.ca/episodes/${e.slug}`
+    })),
   ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const container = document.getElementById('latest-feed');
-  if (!items.length) { container.innerHTML = '<p style="color:var(--text-muted);padding:24px;">No content yet.</p>'; return; }
+  if (!items.length) {
+    container.innerHTML = '<p style="color:var(--text-muted);padding:24px;">No content yet.</p>';
+    return;
+  }
 
   container.innerHTML = items.map(item => `
     <a href="${item.url}" class="feed-item" target="_blank">
@@ -568,6 +662,33 @@ function renderLatestFeed(memos, episodes) {
       ${arrowIcon}
     </a>
   `).join('');
+}
+
+// ─── DYNAMIC STATS ───
+async function updateStats() {
+  try {
+    // Get total memo count
+    const memoRes = await fetch(`${MEMO_URL}/rest/v1/memos?select=id&limit=1`, {
+      headers: { 'apikey': MEMO_KEY, 'Authorization': `Bearer ${MEMO_KEY}`, 'Prefer': 'count=exact' }
+    });
+    const memoCount = memoRes.headers.get('content-range');
+    if (memoCount) {
+      const total = memoCount.split('/')[1];
+      if (total && total !== '*') document.getElementById('stat-memos').textContent = total + '+';
+    }
+  } catch (e) { /* keep defaults */ }
+
+  try {
+    // Get total episode count
+    const epRes = await fetch(`${PODCAST_URL}/rest/v1/podcast_episodes?select=id&limit=1`, {
+      headers: { 'apikey': PODCAST_KEY, 'Authorization': `Bearer ${PODCAST_KEY}`, 'Prefer': 'count=exact' }
+    });
+    const epCount = epRes.headers.get('content-range');
+    if (epCount) {
+      const total = epCount.split('/')[1];
+      if (total && total !== '*') document.getElementById('stat-episodes').textContent = total + '+';
+    }
+  } catch (e) { /* keep defaults */ }
 }
 
 // ─── INIT ───
@@ -588,10 +709,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Load everything, then build the combined feed
+// Load all content, then build the combined feed
 Promise.all([loadMemos(), loadEpisodes()]).then(([memos, episodes]) => {
   renderLatestFeed(memos, episodes);
 });
+updateStats();
 </script>
 </body>
 </html>
