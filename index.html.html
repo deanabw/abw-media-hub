@@ -544,9 +544,9 @@ function loadMemos() {
 
 // Load episodes
 function loadEpisodes() {
-  supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "published_at", 3, "status=eq.published")
+  supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "episode_number", 3, "status=eq.published")
     .catch(function() {
-      return supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "published_at", 3);
+      return supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "episode_number", 3);
     })
     .then(function(episodes) {
       if (!episodes || !episodes.length) return [];
@@ -582,7 +582,7 @@ function loadEpisodes() {
 function loadLatestFeed() {
   var memosPromise = supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,created_at", "created_at", 3)
     .catch(function() { return []; });
-  var episodesPromise = supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,published_at", "published_at", 3)
+  var episodesPromise = supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,published_at,episode_number", "episode_number", 3)
     .catch(function() { return []; });
 
   Promise.all([memosPromise, episodesPromise]).then(function(results) {
