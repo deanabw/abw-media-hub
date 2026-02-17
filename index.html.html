@@ -509,7 +509,7 @@ function supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraPar
 
 // Load memos
 function loadMemos() {
-  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 3, "status=eq.published")
+  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 3)
     .catch(function() {
       return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 3);
     })
@@ -576,7 +576,7 @@ function loadEpisodes() {
 
 // Load combined feed
 function loadLatestFeed() {
-  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 1, "status=eq.published")
+  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 1)
     .catch(function() {
       return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 1);
     })
