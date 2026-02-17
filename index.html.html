@@ -412,18 +412,14 @@ section { padding: 100px 0; position: relative; }
     <div class="latest-header">
       <div>
         <div class="section-label">Fresh Off the Press</div>
-        <h2 class="section-title">Latest from ABW</h2>
+        <h2 class="section-title">Latest from the Tuesday Memo</h2>
       </div>
     </div>
     <div class="latest-feed" id="latest-feed">
       <!-- Static fallback -->
       <a href="https://memo.joinabw.ca/memo" class="feed-item" target="_blank">
         <span class="feed-item-type feed-type-memo">Memo</span>
-        <div class="feed-item-content"><div class="feed-item-title">Loading latest content...</div></div>
-      </a>
-      <a href="https://podcast.joinabw.ca" class="feed-item" target="_blank">
-        <span class="feed-item-type feed-type-podcast">Podcast</span>
-        <div class="feed-item-content"><div class="feed-item-title">Loading latest content...</div></div>
+        <div class="feed-item-content"><div class="feed-item-title">Loading latest memo...</div></div>
       </a>
     </div>
   </div>
@@ -580,56 +576,29 @@ function loadEpisodes() {
 
 // Load combined feed
 function loadLatestFeed() {
-  var memosPromise = supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,created_at", "created_at", 3)
-    .catch(function() { return []; });
-  var episodesPromise = supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,published_at,episode_number", "episode_number", 3)
-    .catch(function() { return []; });
+  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 1, "status=eq.published")
+    .catch(function() {
+      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 1);
+    })
+    .then(function(memos) {
+      if (!memos || !memos.length) return;
 
-  Promise.all([memosPromise, episodesPromise]).then(function(results) {
-    var memos = results[0] || [];
-    var episodes = results[1] || [];
-    var items = [];
+      var container = document.getElementById("latest-feed");
+      var m = memos[0];
+      var title = memoTitleFromSlug(m.slug);
+      var dateStr = m.week_of || m.created_at;
+      var arrowSvg = '<svg class="feed-item-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
 
-    for (var i = 0; i < memos.length; i++) {
-      items.push({
-        type: "memo",
-        title: memoTitleFromSlug(memos[i].slug),
-        date: memos[i].week_of || memos[i].created_at,
-        url: "https://memo.joinabw.ca/memo/" + memos[i].slug
-      });
-    }
-    for (var j = 0; j < episodes.length; j++) {
-      items.push({
-        type: "podcast",
-        title: episodes[j].title,
-        date: episodes[j].published_at,
-        url: "https://podcast.joinabw.ca/episodes/" + episodes[j].slug
-      });
-    }
-
-    items.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
-
-    if (!items.length) return;
-
-    var container = document.getElementById("latest-feed");
-    var arrowSvg = '<svg class="feed-item-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
-    var html = "";
-
-    for (var k = 0; k < items.length; k++) {
-      var item = items[k];
-      var typeClass = item.type === "memo" ? "feed-type-memo" : "feed-type-podcast";
-      var typeLabel = item.type === "memo" ? "Memo" : "Podcast";
-      html += '<a href="' + item.url + '" class="feed-item" target="_blank">';
-      html += '<span class="feed-item-type ' + typeClass + '">' + typeLabel + '</span>';
-      html += '<div class="feed-item-content"><div class="feed-item-title">' + item.title + '</div></div>';
-      html += '<span class="feed-item-date">' + formatDateShort(item.date) + '</span>';
+      var html = '<a href="https://memo.joinabw.ca/memo/' + m.slug + '" class="feed-item" target="_blank">';
+      html += '<span class="feed-item-type feed-type-memo">Memo</span>';
+      html += '<div class="feed-item-content"><div class="feed-item-title">' + title + '</div></div>';
+      html += '<span class="feed-item-date">' + formatDateShort(dateStr) + '</span>';
       html += arrowSvg;
       html += '</a>';
-    }
-    container.innerHTML = html;
-  }).catch(function(err) {
-    console.error("Latest feed error:", err);
-  });
+      container.innerHTML = html;
+    }).catch(function(err) {
+      console.error("Latest feed error:", err);
+    });
 }
 
 // Navbar scroll
