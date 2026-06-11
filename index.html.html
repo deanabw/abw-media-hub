@@ -509,9 +509,9 @@ function supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraPar
 
 // Load memos
 function loadMemos() {
-  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 3)
+  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 3, "status=eq.published")
     .catch(function() {
-      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 3);
+      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 3, "status=eq.published");
     })
     .then(function(memos) {
       if (!memos || !memos.length) return [];
@@ -542,7 +542,7 @@ function loadMemos() {
 function loadEpisodes() {
   supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "episode_number", 3, "status=eq.published")
     .catch(function() {
-      return supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "episode_number", 3);
+      return supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "published_at", 3, "status=eq.published");
     })
     .then(function(episodes) {
       if (!episodes || !episodes.length) return [];
@@ -576,9 +576,9 @@ function loadEpisodes() {
 
 // Load combined feed
 function loadLatestFeed() {
-  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 1)
+  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 1, "status=eq.published")
     .catch(function() {
-      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 1);
+      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 1, "status=eq.published");
     })
     .then(function(memos) {
       if (!memos || !memos.length) return;
