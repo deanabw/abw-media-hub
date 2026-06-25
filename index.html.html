@@ -557,7 +557,7 @@ function loadEpisodes() {
         var meta = formatDate(ep.published_at);
         if (ep.episode_number) meta = "Ep. " + ep.episode_number + " - " + meta;
 
-        html += '<a href="https://podcast.joinabw.ca/episodes/' + ep.slug + '" class="episode-card" target="_blank">';
+        html += '<a href="https://podcast.joinabw.ca/episode/' + ep.slug + '" class="episode-card" target="_blank">';
         html += '<div class="episode-thumb">' + thumbHtml + '</div>';
         html += '<div class="episode-body">';
         if (seriesLabel) html += '<span class="episode-series">' + seriesLabel + '</span>';

@@ -45,7 +45,7 @@ This project is a **read-only consumer** of two separate Supabase projects. Cred
 - **Filter:** `status=eq.published` (fallback: no filter)
 - **Ordering:** by `episode_number` desc
 - **Used by:** `loadEpisodes()` (3 most recent)
-- **Deep links to:** `https://podcast.joinabw.ca/episodes/{slug}`
+- **Deep links to:** `https://podcast.joinabw.ca/episode/{slug}` (route is **singular** `/episode/` on the podcast platform — plural `/episodes/` 404s)
 
 Both calls go through a shared helper `supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraParams)` defined in `index.html.html`.
 
