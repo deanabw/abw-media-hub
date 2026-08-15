@@ -626,5 +626,95 @@ loadMemos();
 loadEpisodes();
 loadLatestFeed();
 </script>
+
+<!-- ============================================================
+     Shared feedback widget — STATIC-PROPERTY VARIANT (Shape A)
+     card: widget-static-property-route-variant
+     ------------------------------------------------------------
+     packages/feedback-widget/src/FeedbackWidget.tsx is a REACT component and
+     this property has no React, no bundler and no build step — so it cannot be
+     mounted here. This is a vanilla port with the same user-facing contract:
+     same launcher label, same two types, same success sentence, and the same
+     refusal to claim success on a non-2xx.
+
+     ⛔ The token is NOT here and must never be. This posts same-origin to
+     /api/feedback, which holds the bearer server-side.
+     ============================================================ -->
+<div id="tenfold-feedback-root"></div>
+<script>
+(function () {
+  var ENDPOINT = '/api/feedback';
+  var root = document.getElementById('tenfold-feedback-root');
+  var open = false, type = 'bug', sending = false;
+
+  var launcher = document.createElement('button');
+  launcher.type = 'button';
+  launcher.textContent = 'Feedback';
+  launcher.setAttribute('aria-label', 'Feedback');
+  launcher.style.cssText = 'position:fixed;right:20px;bottom:20px;z-index:2147483000;padding:10px 16px;border-radius:999px;border:0;background:#0f172a;color:#fff;font:600 14px system-ui,sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)';
+
+  var panel = document.createElement('div');
+  panel.style.cssText = 'position:fixed;right:20px;bottom:74px;z-index:2147483000;width:320px;max-width:calc(100vw - 40px);background:#fff;color:#0f172a;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.25);padding:16px;font:14px system-ui,sans-serif;display:none';
+
+  function render() {
+    panel.innerHTML = '';
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:8px;margin-bottom:10px';
+    [['bug', 'Something broke'], ['enhancement', 'Idea']].forEach(function (t) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = t[1];
+      b.style.cssText = 'flex:1;padding:8px;border-radius:8px;cursor:pointer;font:inherit;border:1px solid ' + (type === t[0] ? '#0f172a' : '#cbd5e1') + ';background:' + (type === t[0] ? '#0f172a' : '#fff') + ';color:' + (type === t[0] ? '#fff' : '#0f172a');
+      b.onclick = function () { type = t[0]; render(); };
+      row.appendChild(b);
+    });
+    panel.appendChild(row);
+
+    var ta = document.createElement('textarea');
+    ta.placeholder = type === 'bug' ? 'What happened?' : 'What would you like?';
+    ta.rows = 4;
+    ta.style.cssText = 'width:100%;box-sizing:border-box;padding:8px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;resize:vertical';
+    panel.appendChild(ta);
+
+    var who = document.createElement('input');
+    who.placeholder = 'Your name or email (optional)';
+    who.style.cssText = 'width:100%;box-sizing:border-box;margin-top:8px;padding:8px;border:1px solid #cbd5e1;border-radius:8px;font:inherit';
+    panel.appendChild(who);
+
+    var msg = document.createElement('p');
+    msg.style.cssText = 'margin:10px 0 0;min-height:18px';
+    var send = document.createElement('button');
+    send.type = 'button'; send.textContent = 'Send';
+    send.style.cssText = 'margin-top:10px;width:100%;padding:9px;border:0;border-radius:8px;background:#0f172a;color:#fff;font:600 14px system-ui,sans-serif;cursor:pointer';
+
+    send.onclick = function () {
+      var text = (ta.value || '').trim();
+      if (!text || sending) return;
+      sending = true; send.disabled = true; msg.textContent = 'Sending…';
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          type: type, message: text,
+          reporter: (who.value || '').trim() || null,
+          pageUrl: location.href, userAgent: navigator.userAgent
+        })
+      }).then(function (r) {
+        sending = false; send.disabled = false;
+        if (r.ok) { panel.innerHTML = '<p style="margin:0">Thanks — that\'s on the board.</p>'; }
+        else { msg.textContent = "That didn't send. Please try again in a moment."; }
+      }).catch(function () {
+        sending = false; send.disabled = false;
+        msg.textContent = "That didn't send — you may be offline. Please try again.";
+      });
+    };
+    panel.appendChild(send);
+    panel.appendChild(msg);
+  }
+
+  launcher.onclick = function () { open = !open; if (open) render(); panel.style.display = open ? 'block' : 'none'; };
+  root.appendChild(launcher); root.appendChild(panel);
+})();
+</script>
+
 </body>
 </html>
