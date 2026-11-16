@@ -462,12 +462,10 @@ section { padding: 100px 0; position: relative; }
 </footer>
 
 <script>
-// Supabase config
-var MEMO_URL = "https://dvcgzxtqegymnsjqfeue.supabase.co";
-var MEMO_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2Y2d6eHRxZWd5bW5zanFmZXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5NTgwMDAsImV4cCI6MjA4NjUzNDAwMH0.fGcdFjf3mi-eyikcwtvqWev3rk6A_2MWC7fGnsI9U68";
-
-var PODCAST_URL = "https://avdwudfuuhjvnagfnpix.supabase.co";
-var PODCAST_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2ZHd1ZGZ1dWhqdm5hZ2ZucGl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExODQzNjcsImV4cCI6MjA4Njc2MDM2N30.uTeWubmQXy-qBzv7XxL7pPGUqP83USiap8-lIwicMbM";
+// The ABW engine's two public lists (memo and podcast moved into the engine, Nov 2026).
+// Signed out, published rows only, no key. Each answers { memos: [...] } / { episodes: [...] }.
+var MEMO_LIST_URL = "https://memo.joinabw.ca/api/memos";
+var PODCAST_LIST_URL = "https://podcast.joinabw.ca/api/episodes";
 
 var thumbGradients = [
   "linear-gradient(135deg, #1B2A4A 0%, #2E86AB 100%)",
@@ -496,23 +494,35 @@ function memoTitleFromSlug(slug) {
   }).join(" ");
 }
 
-function supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraParams) {
-  var url = baseUrl + "/rest/v1/" + table + "?select=" + select + "&order=" + orderCol + ".desc&limit=" + limit;
-  if (extraParams) url += "&" + extraParams;
-  return fetch(url, {
-    headers: { "apikey": apiKey, "Authorization": "Bearer " + apiKey }
-  }).then(function(res) {
-    if (!res.ok) throw new Error("Supabase error " + res.status);
+function listQuery(url, key) {
+  return fetch(url).then(function(res) {
+    if (!res.ok) throw new Error("List error " + res.status);
     return res.json();
+  }).then(function(body) {
+    return (body && Array.isArray(body[key])) ? body[key] : [];
+  });
+}
+
+// Newest first: memos by week (then created), episodes by number (then published date).
+function latestMemos(limit) {
+  return listQuery(MEMO_LIST_URL, "memos").then(function(memos) {
+    return memos.slice().sort(function(a, b) {
+      return String(b.week_of || b.created_at || "").localeCompare(String(a.week_of || a.created_at || ""));
+    }).slice(0, limit);
+  });
+}
+function latestEpisodes(limit) {
+  return listQuery(PODCAST_LIST_URL, "episodes").then(function(episodes) {
+    return episodes.filter(function(e) { return !e.status || e.status === "published"; }).sort(function(a, b) {
+      var n = (Number(b.episode_number) || 0) - (Number(a.episode_number) || 0);
+      return n !== 0 ? n : String(b.published_at || "").localeCompare(String(a.published_at || ""));
+    }).slice(0, limit);
   });
 }
 
 // Load memos
 function loadMemos() {
-  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 3, "status=eq.published")
-    .catch(function() {
-      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 3, "status=eq.published");
-    })
+  latestMemos(3)
     .then(function(memos) {
       if (!memos || !memos.length) return [];
       var container = document.getElementById("memo-cards");
@@ -540,10 +550,7 @@ function loadMemos() {
 
 // Load episodes
 function loadEpisodes() {
-  supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "episode_number", 3, "status=eq.published")
-    .catch(function() {
-      return supabaseQuery(PODCAST_URL, PODCAST_KEY, "podcast_episodes", "id,title,slug,series,description,thumbnail_url,published_at,episode_number", "published_at", 3, "status=eq.published");
-    })
+  latestEpisodes(3)
     .then(function(episodes) {
       if (!episodes || !episodes.length) return [];
       var container = document.getElementById("episode-cards");
@@ -576,10 +583,7 @@ function loadEpisodes() {
 
 // Load combined feed
 function loadLatestFeed() {
-  supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "week_of", 1, "status=eq.published")
-    .catch(function() {
-      return supabaseQuery(MEMO_URL, MEMO_KEY, "memos", "id,slug,week_of,intro,created_at", "created_at", 1, "status=eq.published");
-    })
+  latestMemos(1)
     .then(function(memos) {
       if (!memos || !memos.length) return;
 

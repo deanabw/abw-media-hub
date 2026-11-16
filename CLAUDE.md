@@ -26,28 +26,21 @@ abw-media-hub/
 That is the full tree. There is no `src/`, no `app/`, no config files. All logic lives at the bottom of `index.html.html` inside a single `<script>` block.
 
 ## Database
-This project is a **read-only consumer** of two separate Supabase projects. Credentials are currently hardcoded in `index.html.html` (anon keys only, which is expected for public Supabase REST reads).
+This project is a **read-only consumer** of the ABW engine's two public lists (the memo and the podcast moved into the engine, Nov 2026). No key, no credential: both are signed-out GETs answering published rows only.
 
-### Memo Supabase instance
-- **Project ref:** `dvcgzxtqegymnsjqfeue`
-- **URL:** `https://dvcgzxtqegymnsjqfeue.supabase.co`
-- **Table read:** `memos`
-- **Columns selected:** `id, slug, week_of, intro, created_at`
-- **Ordering:** by `week_of` desc (fallback: `created_at` desc)
+### Memo list
+- **URL:** `https://memo.joinabw.ca/api/memos` → `{ memos: [{ id, slug, week_of, intro, created_at }] }`
+- **Ordering:** by `week_of` desc (then `created_at`), sorted in the page
 - **Used by:** `loadMemos()` (3 most recent) and `loadLatestFeed()` (1 most recent)
 - **Deep links to:** `https://memo.joinabw.ca/memo/{slug}`
 
-### Podcast Supabase instance
-- **Project ref:** `avdwudfuuhjvnagfnpix`
-- **URL:** `https://avdwudfuuhjvnagfnpix.supabase.co`
-- **Table read:** `podcast_episodes`
-- **Columns selected:** `id, title, slug, series, description, thumbnail_url, published_at, episode_number`
-- **Filter:** `status=eq.published` (fallback: no filter)
-- **Ordering:** by `episode_number` desc
+### Podcast list
+- **URL:** `https://podcast.joinabw.ca/api/episodes` → `{ episodes: [{ id, episode_number, title, slug, series, description, thumbnail_url, published_at, status, ... }] }`
+- **Ordering:** by `episode_number` desc (then `published_at`), sorted in the page
 - **Used by:** `loadEpisodes()` (3 most recent)
-- **Deep links to:** `https://podcast.joinabw.ca/episode/{slug}` (route is **singular** `/episode/` on the podcast platform — plural `/episodes/` 404s)
+- **Deep links to:** `https://podcast.joinabw.ca/episode/{slug}` (singular `/episode/`)
 
-Both calls go through a shared helper `supabaseQuery(baseUrl, apiKey, table, select, orderCol, limit, extraParams)` defined in `index.html.html`.
+Both go through `listQuery(url, key)`, `latestMemos(limit)` and `latestEpisodes(limit)` in `index.html.html`. The engine allows `https://media.joinabw.ca` in both lists' CORS.
 
 ## Critical Rules
 - **READ-ONLY AGGREGATOR.** This project must never `INSERT`, `UPDATE`, `DELETE`, or otherwise mutate either Supabase database. Only `GET /rest/v1/...` queries are allowed. Authoring of memos and episodes happens in their respective source projects.
